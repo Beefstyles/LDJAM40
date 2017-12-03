@@ -6,11 +6,14 @@ public class StartFinishGate : MonoBehaviour {
 
     LapController lapController;
     GhostCar ghostCar;
+    GameController gc;
 
 	void Start ()
     {
         lapController = FindObjectOfType<LapController>();
-	}
+        gc = FindObjectOfType<GameController>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -29,7 +32,16 @@ public class StartFinishGate : MonoBehaviour {
             }
             else
             {
-                lapController.LapFinished();
+                if (gc.CanFinishLap)
+                {
+                    lapController.LapFinished();
+                }
+
+                else
+                {
+
+                }
+                
             }
             
             

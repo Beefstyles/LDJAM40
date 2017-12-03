@@ -28,7 +28,10 @@ public class PauseMenu : MonoBehaviour {
 
     void Update()
     {
-        //StartCoroutine("DelaySlider");
+        if (Input.GetButtonDown("Menu"))
+        {
+            TogglePauseMenu();
+        }
     }
 
     public void UpdateOtherSliders(string sliderName)
@@ -60,10 +63,12 @@ public class PauseMenu : MonoBehaviour {
         if (PauseMenuObjects.activeSelf)
         {
             PauseMenuObjects.SetActive(false);
+            Time.timeScale = 1F;
         }
         else
         {
             PauseMenuObjects.SetActive(true);
+            Time.timeScale = 0F;
         }
     }
 
@@ -71,4 +76,6 @@ public class PauseMenu : MonoBehaviour {
     {
         gameController.StartLap();
     }
+
+
 }

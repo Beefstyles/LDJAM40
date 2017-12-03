@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour {
 
-    float carSpeed = 10F;
-    float brakingForce = 5F;
-    float torqueForce = -200F; // Default 200F
+    float carSpeed = 3F; // Default 10F
+    float brakingForce = 1F; // Default 5F
+    float torqueForce = -50F; // Default -200F
     float driftFactorSticky = 0.9F;
     float driftFactorSlippy = 1F;
     float maxStickyVelocity = 2.5F;

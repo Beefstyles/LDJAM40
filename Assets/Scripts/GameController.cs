@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour {
     public GameObject PlayerCar;
     public Transform PlayerSpawnLocation;
     private GameObject playerClone;
+
+    CarController cc;
     LapTimer lapTimer;
 
     int numberOfGatesTrigged = 0;
@@ -21,23 +23,23 @@ public class GameController : MonoBehaviour {
     {
         numberOfGates = 0;
         lapTimer.ResetTimer();
-        if(playerClone != null)
+        cc = FindObjectOfType<CarController>();
+        if(cc != null)
         {
-            Destroy(playerClone);
+            Destroy(cc.gameObject);
         }
-        playerClone = Instantiate(PlayerCar, PlayerSpawnLocation.position, Quaternion.identity) as GameObject;
+        playerClone = Instantiate(PlayerCar, PlayerSpawnLocation.position, PlayerSpawnLocation.rotation) as GameObject;
 
         timingGates = FindObjectsOfType<TimingGate>();
-        foreach (var gate in timingGates)
-        {
-            numberOfGates++;
-            gate.TimingGateTriggered = false;
-        }
+        ResetAllGates();
     }
+
+
 
     void Start()
     {
-        
+        lapTimer = FindObjectOfType<LapTimer>();
+        StartLap();
     }
 
     public void CheckIfAllGatesHit()
@@ -53,7 +55,18 @@ public class GameController : MonoBehaviour {
 
         if(numberOfGatesTrigged >= numberOfGates)
         {
+            CanFinishLap = true;
+        }
+    }
 
+    public void ResetAllGates()
+    {
+        numberOfGates = 0;
+        timingGates = FindObjectsOfType<TimingGate>();
+        foreach (var gate in timingGates)
+        {
+            numberOfGates++;
+            gate.ResetGate();
         }
     }
 }
