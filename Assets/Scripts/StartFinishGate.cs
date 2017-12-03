@@ -6,6 +6,7 @@ public class StartFinishGate : MonoBehaviour {
 
 
     LapController lapController;
+    GhostCar ghostCar;
 
 	void Start ()
     {
@@ -24,6 +25,8 @@ public class StartFinishGate : MonoBehaviour {
             if (!lapController.LapStarted)
             {
                 lapController.LapStarted = true;
+                ghostCar = coll.GetComponent<GhostCar>();
+                ghostCar.isRecording = true;
                 Debug.Log("Exited Through Gate");
             }
             

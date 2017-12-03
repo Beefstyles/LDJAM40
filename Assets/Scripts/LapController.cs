@@ -1,18 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LapController : MonoBehaviour {
 
     public bool LapStarted = false;
+    public string BestLap;
+    public string CurrentSplit;
 
-	// Use this for initialization
-	void Start () {
+    public Text BestLapText, CurrentSplitText;
+
+    void Start ()
+    {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+	void Update ()
+    {
 		
 	}
+
+    public void UpdateBestLapAndSplit()
+    {
+        BestLapText.text = BestLap;
+        CurrentSplitText.text = CurrentSplit;
+    }
 }
