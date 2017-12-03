@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GhostCar : MonoBehaviour {
 
-    public Dictionary<float, Vector3> PositionRecorder;
-    public Dictionary<float, Quaternion> RotationRecorder;
+    public Dictionary<float, Vector3> PositionRecorder = new Dictionary<float, Vector3>();
+    public Dictionary<float, Quaternion> RotationRecorder = new Dictionary<float, Quaternion>();
 
     float splitPoint = 0;
 

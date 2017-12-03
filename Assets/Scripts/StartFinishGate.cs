@@ -29,6 +29,11 @@ public class StartFinishGate : MonoBehaviour {
                 ghostCar.isRecording = true;
                 Debug.Log("Exited Through Gate");
             }
+            else
+            {
+                lapController.LapFinished();
+            }
+            
             
         }
     }

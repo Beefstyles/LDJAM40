@@ -35,7 +35,7 @@ public class LapTimer : MonoBehaviour {
         }
 	}
 
-    void ResetTimer()
+    public void ResetTimer()
     {
         TimerValue = 0F;
     }
