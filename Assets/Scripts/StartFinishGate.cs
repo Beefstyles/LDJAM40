@@ -24,8 +24,9 @@ public class StartFinishGate : MonoBehaviour {
             if (!lapController.LapStarted)
             {
                 lapController.LapStarted = true;
+                Debug.Log("Exited Through Gate");
             }
-            Debug.Log("Exited Through Gate");
+            
         }
     }
 
