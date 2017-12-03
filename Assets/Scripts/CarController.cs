@@ -5,8 +5,12 @@ using UnityEngine;
 public class CarController : MonoBehaviour {
 
     float carSpeed = 10F;
-    float torqueForce = -2F;
-    float driftFactor = 0.9F;
+    float torqueForce = -200F;
+    float driftFactorSticky = 0.9F;
+    float driftFactorSlippy = 1F;
+    float maxStickyVelocity = 2.5F;
+    float minSlippyVelocity = 1.5F;
+
     Rigidbody2D rb;
 
 
@@ -23,9 +27,19 @@ public class CarController : MonoBehaviour {
             rb.AddForce(transform.up * carSpeed);
         }
 
-        rb.AddTorque(Input.GetAxis("Horizontal") * torqueForce);
+        float tf = Mathf.Lerp(0, torqueForce, rb.velocity.magnitude / 10);
 
-        rb.velocity = ForwardVelocity() + RightVelocity()*driftFactor;
+        rb.angularVelocity = Input.GetAxis("Horizontal") * tf;
+
+        float driftFactor = driftFactorSticky;
+        if(RightVelocity().magnitude > maxStickyVelocity)
+        {
+            driftFactor = driftFactorSlippy;
+        }
+
+        
+
+        rb.velocity = ForwardVelocity() + RightVelocity() * driftFactor;
     }
 
     Vector2 ForwardVelocity()
