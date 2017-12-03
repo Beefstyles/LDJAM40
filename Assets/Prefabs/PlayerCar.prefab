@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 114366528594633164}
   - component: {fileID: 61498338637198162}
   - component: {fileID: 114231276243069966}
+  - component: {fileID: 82775333571107120}
+  - component: {fileID: 82849066869697032}
   m_Layer: 0
   m_Name: PlayerCar
   m_TagString: PlayerCar
@@ -209,6 +211,166 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
+--- !u!82 &82775333571107120
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1020674619999984}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.574
+  m_Pitch: 0.44
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!82 &82849066869697032
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1020674619999984}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.3
+  m_Pitch: 0.6
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114231276243069966
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -233,6 +395,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c0d7eb220635948b65862ade589bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EngineSounds:
+  - {fileID: 8300000, guid: f789b1254b07bb648ad2107b66ad9cb6, type: 3}
+  - {fileID: 8300000, guid: b9c479b1b9b4ea44aa7ea846644d6167, type: 3}
+  - {fileID: 8300000, guid: 77ef438d022976b49a0dd7dcb50bd5b7, type: 3}
+  - {fileID: 8300000, guid: 7b6700f715006df4891e32f60320feb1, type: 3}
+  - {fileID: 8300000, guid: d1fe4b817766ec442b03275607ef9cbb, type: 3}
+  - {fileID: 8300000, guid: 028177336fe56624581380741951aed8, type: 3}
+  WallHitSounds:
+  - {fileID: 8300000, guid: 31085c5eaa02edc49a3f6806594bc034, type: 3}
+  - {fileID: 8300000, guid: 0c2af1075b116a945ae8cec4321f218e, type: 3}
+  - {fileID: 8300000, guid: 26d9119f9b82ab8489191b85efc6e7df, type: 3}
+  - {fileID: 8300000, guid: dfd2373484f8a5147a3825552d52816f, type: 3}
+  engineController: {fileID: 82849066869697032}
+  wallHitController: {fileID: 82775333571107120}
   FrontLeftTyre: {fileID: 1524067943127028}
   FrontRightTyre: {fileID: 1539790573459548}
   RearLeftTyre: {fileID: 1247313560418066}

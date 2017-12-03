@@ -5,7 +5,7 @@ using UnityEngine;
 public class CarController : MonoBehaviour {
 
     float carSpeed = 10F;
-    float brakingForce = 2F;
+    float brakingForce = 5F;
     float torqueForce = -200F;
     float driftFactorSticky = 0.9F;
     float driftFactorSlippy = 1F;
@@ -16,6 +16,8 @@ public class CarController : MonoBehaviour {
     public AudioClip[] WallHitSounds;
     public AudioSource engineController;
     public AudioSource wallHitController;
+
+    public 
 
     public GameObject FrontLeftTyre, FrontRightTyre, RearLeftTyre, RearRightTyre;
 
@@ -93,8 +95,17 @@ public class CarController : MonoBehaviour {
 
         if (Input.GetButton("Brakes"))
         {
-            rb.AddForceAtPosition(-transform.up * brakingForce, FrontLeftTyre.transform.position);
-            rb.AddForceAtPosition(-transform.up * brakingForce, FrontRightTyre.transform.position);
+            float brakeForce = 0;
+            if(rb.velocity.magnitude <= 0)
+            {
+                brakeForce = 1F;
+            }
+            else
+            {
+                brakeForce = brakingForce;
+            }
+            rb.AddForceAtPosition(-transform.up * brakeForce, FrontLeftTyre.transform.position);
+            rb.AddForceAtPosition(-transform.up * brakeForce, FrontRightTyre.transform.position);
         }
 
         // If using positional wheel in phyis, then you probably want to add left/right force at the position of the front tyres proportional to your current forward speed
