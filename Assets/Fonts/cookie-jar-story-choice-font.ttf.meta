@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 2837b10fe03c55349b0b987ca9324a27
+timeCreated: 1512273070
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Cookie Jar Story Choice Font
+  fontNames:
+  - Cookie Jar Story Choice Font
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

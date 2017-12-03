@@ -1,16 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LapTimer : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    public float TimerValue;
+    LapController lapController;
+    public Text TimerMinutes, TimerSeconds;
+
+
+	void Start ()
+    {
+        ResetTimer();
+        lapController = FindObjectOfType<LapController>();
+    }
 	
-	// Update is called once per frame
-	void Update () {
-		
+	void Update ()
+    {
+        if (lapController.LapStarted)
+        {
+            TimerValue += Time.deltaTime;
+        }
 	}
+
+    void ResetTimer()
+    {
+        TimerValue = 0F;
+    }
 }
