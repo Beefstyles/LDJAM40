@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour {
 
-    float carSpeed = 10F;
+    float carSpeed = 5F;
+    float brakingForce = 2F;
     float torqueForce = -200F;
     float driftFactorSticky = 0.9F;
     float driftFactorSlippy = 1F;
     float maxStickyVelocity = 2.5F;
     float minSlippyVelocity = 1.5F;
+
+    public GameObject FrontLeftTyre, FrontRightTyre, RearLeftTyre, RearRightTyre;
 
     Rigidbody2D rb;
 
@@ -24,8 +27,15 @@ public class CarController : MonoBehaviour {
     {
         if (Input.GetButton("Accelerate"))
         {
-            rb.AddForce(transform.up * carSpeed);
-            // Consider using rb.AddForceAtPosition to apply fore twice at the position of the rear tyres
+            //rb.AddForce(transform.up * carSpeed);
+            rb.AddForceAtPosition(transform.up * carSpeed, RearLeftTyre.transform.position);
+            rb.AddForceAtPosition(transform.up * carSpeed, RearRightTyre.transform.position);
+        }
+
+        if (Input.GetButton("Brakes"))
+        {
+            rb.AddForceAtPosition(-transform.up * brakingForce, FrontLeftTyre.transform.position);
+            rb.AddForceAtPosition(-transform.up * brakingForce, FrontRightTyre.transform.position);
         }
 
         // If using positional wheel in phyis, then you probably want to add left/right force at the position of the front tyres proportional to your current forward speed
