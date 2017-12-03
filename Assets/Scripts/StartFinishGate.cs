@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class StartFinishGate : MonoBehaviour {
 
-
     LapController lapController;
     GhostCar ghostCar;
 

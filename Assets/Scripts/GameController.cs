@@ -6,13 +6,18 @@ public class GameController : MonoBehaviour {
 
     public float PowerMultiplication, BrakesMultiplication, HandlingMultiplication;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public GameObject PlayerCar;
+    public Transform PlayerSpawnLocation;
+    private GameObject playerClone;
+    LapTimer lapTimer;
+
+    public void StartLap()
+    {
+        lapTimer.ResetTimer();
+        if(playerClone != null)
+        {
+            Destroy(playerClone);
+        }
+        playerClone = Instantiate(PlayerCar, PlayerSpawnLocation.position, Quaternion.identity) as GameObject;
+    }
 }

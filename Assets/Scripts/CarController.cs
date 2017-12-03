@@ -6,7 +6,7 @@ public class CarController : MonoBehaviour {
 
     float carSpeed = 10F;
     float brakingForce = 5F;
-    float torqueForce = -200F;
+    float torqueForce = -200F; // Default 200F
     float driftFactorSticky = 0.9F;
     float driftFactorSlippy = 1F;
     float maxStickyVelocity = 2.5F;
@@ -23,12 +23,15 @@ public class CarController : MonoBehaviour {
 
     GameController gameController;
 
-    
+    void Awake()
+    {
+        gameController = FindObjectOfType<GameController>();
+    }
 
     void Start ()
     {
         rb = GetComponent<Rigidbody2D>();
-        gameController = FindObjectOfType<GameController>();
+        
         engineController.loop = true;
     }
 
@@ -62,7 +65,6 @@ public class CarController : MonoBehaviour {
         {
             engineController.clip = EngineSounds[0];
         }
-        Debug.Log(rb.velocity.magnitude);
 
         if (!engineController.isPlaying)
         {
@@ -73,7 +75,6 @@ public class CarController : MonoBehaviour {
     void Update()
     {
         ChangeSoundOnSpeed();
-        UpdateParameters();
     }
 
     void OnCollisionEnter2D(Collision2D coll)
@@ -86,32 +87,15 @@ public class CarController : MonoBehaviour {
         }
     }
 
-    void UpdateParameters()
-    {
-        if(torqueForce != (gameController.HandlingMultiplication * torqueForce))
-        {
-            torqueForce = gameController.HandlingMultiplication * torqueForce;
-        }
-
-        if (brakingForce != (gameController.BrakesMultiplication * brakingForce))
-        {
-            brakingForce = gameController.BrakesMultiplication * brakingForce;
-        }
-
-        if (brakingForce != (gameController.BrakesMultiplication * brakingForce))
-        {
-            brakingForce = gameController.BrakesMultiplication * brakingForce;
-        }
-    }
-	
+ 	
 
     void FixedUpdate()
     {
         if (Input.GetButton("Accelerate"))
         {
             //rb.AddForce(transform.up * carSpeed);
-            rb.AddForceAtPosition(transform.up * carSpeed, RearLeftTyre.transform.position);
-            rb.AddForceAtPosition(transform.up * carSpeed, RearRightTyre.transform.position);
+            rb.AddForceAtPosition(transform.up * carSpeed * gameController.PowerMultiplication, RearLeftTyre.transform.position);
+            rb.AddForceAtPosition(transform.up * carSpeed * gameController.PowerMultiplication, RearRightTyre.transform.position);
         }
 
         if (Input.GetButton("Brakes"))
@@ -119,28 +103,30 @@ public class CarController : MonoBehaviour {
             float brakeForce = 0;
             if(rb.velocity.magnitude <= 0)
             {
-                brakeForce = 1F;
+                brakeForce = 0.1F;
+                Debug.Log("Minus");
+                rb.AddForceAtPosition(-transform.up * brakeForce, FrontLeftTyre.transform.position);
+                rb.AddForceAtPosition(-transform.up * brakeForce, FrontRightTyre.transform.position);
             }
             else
             {
                 brakeForce = brakingForce;
+                rb.AddForceAtPosition(-transform.up * brakeForce * gameController.BrakesMultiplication, FrontLeftTyre.transform.position);
+                rb.AddForceAtPosition(-transform.up * brakeForce * gameController.BrakesMultiplication, FrontRightTyre.transform.position);
             }
-            rb.AddForceAtPosition(-transform.up * brakeForce, FrontLeftTyre.transform.position);
-            rb.AddForceAtPosition(-transform.up * brakeForce, FrontRightTyre.transform.position);
+            
         }
 
         // If using positional wheel in phyis, then you probably want to add left/right force at the position of the front tyres proportional to your current forward speed
         float tf = Mathf.Lerp(0, torqueForce, rb.velocity.magnitude / 10);
 
-        rb.angularVelocity = Input.GetAxis("Horizontal") * tf;
+        rb.angularVelocity = Input.GetAxis("Horizontal") * tf * gameController.HandlingMultiplication;
 
         float driftFactor = driftFactorSticky;
         if(RightVelocity().magnitude > maxStickyVelocity)
         {
             driftFactor = driftFactorSlippy;
         }
-
-        
 
         rb.velocity = ForwardVelocity() + RightVelocity() * driftFactor;
     }

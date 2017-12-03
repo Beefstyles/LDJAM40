@@ -8,15 +8,18 @@ public class PauseMenu : MonoBehaviour {
     public Slider powerSlider, brakesSlider, handlingSlider;
     public int MaxSliderValue = 10;
 
+    public GameObject PauseMenuObjects;
+
 
     GameController gameController;
 
     void Start()
     {
+        gameController = FindObjectOfType<GameController>();
         powerSlider.value = MaxSliderValue / 3;
         brakesSlider.value = MaxSliderValue / 3;
         handlingSlider.value = MaxSliderValue / 3;
-        gameController = FindObjectOfType<GameController>();
+        
 
         gameController.PowerMultiplication = powerSlider.value;
         gameController.BrakesMultiplication = brakesSlider.value;
@@ -26,13 +29,6 @@ public class PauseMenu : MonoBehaviour {
     void Update()
     {
         //StartCoroutine("DelaySlider");
-    }
-
-    IEnumerator DelaySlider()
-    {
-        yield return new WaitForSeconds(0.5F);
-        powerSlider.value = MaxSliderValue - brakesSlider.value - handlingSlider.value;
-
     }
 
     public void UpdateOtherSliders(string sliderName)
@@ -57,5 +53,22 @@ public class PauseMenu : MonoBehaviour {
         gameController.PowerMultiplication = powerSlider.value;
         gameController.BrakesMultiplication = brakesSlider.value;
         gameController.HandlingMultiplication = handlingSlider.value;
+    }
+
+    public void TogglePauseMenu()
+    {
+        if (PauseMenuObjects.activeSelf)
+        {
+            PauseMenuObjects.SetActive(false);
+        }
+        else
+        {
+            PauseMenuObjects.SetActive(true);
+        }
+    }
+
+    public void RestartLap()
+    {
+        gameController.StartLap();
     }
 }

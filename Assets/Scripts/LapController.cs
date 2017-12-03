@@ -23,11 +23,6 @@ public class LapController : MonoBehaviour {
         lapTimer = FindObjectOfType<LapTimer>();
     }
 
-	void Update ()
-    {
-		
-	}
-
     private void UpdateBestLapAndSplit()
     {
         BestLapText.text = BestLap;
