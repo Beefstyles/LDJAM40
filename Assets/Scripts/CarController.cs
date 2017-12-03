@@ -25,8 +25,10 @@ public class CarController : MonoBehaviour {
         if (Input.GetButton("Accelerate"))
         {
             rb.AddForce(transform.up * carSpeed);
+            // Consider using rb.AddForceAtPosition to apply fore twice at the position of the rear tyres
         }
 
+        // If using positional wheel in phyis, then you probably want to add left/right force at the position of the front tyres proportional to your current forward speed
         float tf = Mathf.Lerp(0, torqueForce, rb.velocity.magnitude / 10);
 
         rb.angularVelocity = Input.GetAxis("Horizontal") * tf;
