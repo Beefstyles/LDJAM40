@@ -21,10 +21,14 @@ public class CarController : MonoBehaviour {
 
     Rigidbody2D rb;
 
+    GameController gameController;
+
+    
 
     void Start ()
     {
         rb = GetComponent<Rigidbody2D>();
+        gameController = FindObjectOfType<GameController>();
         engineController.loop = true;
     }
 
@@ -69,6 +73,7 @@ public class CarController : MonoBehaviour {
     void Update()
     {
         ChangeSoundOnSpeed();
+        UpdateParameters();
     }
 
     void OnCollisionEnter2D(Collision2D coll)
@@ -78,6 +83,24 @@ public class CarController : MonoBehaviour {
         if (!wallHitController.isPlaying)
         {
             wallHitController.Play();
+        }
+    }
+
+    void UpdateParameters()
+    {
+        if(torqueForce != (gameController.HandlingMultiplication * torqueForce))
+        {
+            torqueForce = gameController.HandlingMultiplication * torqueForce;
+        }
+
+        if (brakingForce != (gameController.BrakesMultiplication * brakingForce))
+        {
+            brakingForce = gameController.BrakesMultiplication * brakingForce;
+        }
+
+        if (brakingForce != (gameController.BrakesMultiplication * brakingForce))
+        {
+            brakingForce = gameController.BrakesMultiplication * brakingForce;
         }
     }
 	

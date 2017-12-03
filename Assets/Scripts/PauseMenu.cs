@@ -1,25 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
-
-public class PauseMenuController : MonoBehaviour {
+public class PauseMenu : MonoBehaviour {
 
     public Slider powerSlider, brakesSlider, handlingSlider;
     public int MaxSliderValue = 10;
 
-    public int PowerMultiplication, BrakesMultiplication, HandlingMultiplication;
 
-	void Start ()
+    GameController gameController;
+
+    void Start()
     {
         powerSlider.value = MaxSliderValue / 3;
         brakesSlider.value = MaxSliderValue / 3;
         handlingSlider.value = MaxSliderValue / 3;
+        gameController = FindObjectOfType<GameController>();
 
+        gameController.PowerMultiplication = powerSlider.value;
+        gameController.BrakesMultiplication = brakesSlider.value;
+        gameController.HandlingMultiplication = handlingSlider.value;
     }
-	
-	void Update ()
+
+    void Update()
     {
         //StartCoroutine("DelaySlider");
     }
@@ -28,7 +32,7 @@ public class PauseMenuController : MonoBehaviour {
     {
         yield return new WaitForSeconds(0.5F);
         powerSlider.value = MaxSliderValue - brakesSlider.value - handlingSlider.value;
-        
+
     }
 
     public void UpdateOtherSliders(string sliderName)
@@ -47,6 +51,11 @@ public class PauseMenuController : MonoBehaviour {
                 brakesSlider.value = MaxSliderValue - handlingSlider.value - powerSlider.value;
                 powerSlider.value = MaxSliderValue - handlingSlider.value - brakesSlider.value;
                 break;
+
         }
+
+        gameController.PowerMultiplication = powerSlider.value;
+        gameController.BrakesMultiplication = brakesSlider.value;
+        gameController.HandlingMultiplication = handlingSlider.value;
     }
 }

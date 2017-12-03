@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    public float PowerMultiplication, BrakesMultiplication, HandlingMultiplication;
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
