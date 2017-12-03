@@ -14,6 +14,8 @@ public class LapController : MonoBehaviour {
     private int elapsedSeconds;
     private float fraction;
 
+    public Transform playerSpawnPoint;
+
     public Text BestLapText, CurrentSplitText;
 
     void Start ()

@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour {
 
-    float carSpeed = 5F;
+    float carSpeed = 10F;
     float brakingForce = 2F;
     float torqueForce = -200F;
     float driftFactorSticky = 0.9F;
     float driftFactorSlippy = 1F;
     float maxStickyVelocity = 2.5F;
     float minSlippyVelocity = 1.5F;
+
+    public AudioClip[] EngineSounds;
+    public AudioClip[] WallHitSounds;
+    public AudioSource engineController;
+    public AudioSource wallHitController;
 
     public GameObject FrontLeftTyre, FrontRightTyre, RearLeftTyre, RearRightTyre;
 
@@ -20,7 +25,61 @@ public class CarController : MonoBehaviour {
     void Start ()
     {
         rb = GetComponent<Rigidbody2D>();
-	}
+        engineController.loop = true;
+    }
+
+    void ChangeSoundOnSpeed()
+    {
+        if(rb.velocity.magnitude >= (carSpeed * 2) / 1.5)
+        {
+            engineController.clip = EngineSounds[5];
+        }
+        else if (rb.velocity.magnitude >= (carSpeed * 2) / 2)
+        {
+            engineController.clip = EngineSounds[4];
+        }
+
+        else if (rb.velocity.magnitude >= (carSpeed * 2) / 2.5)
+        {
+            engineController.clip = EngineSounds[3];
+        }
+
+        else if (rb.velocity.magnitude >= (carSpeed * 2) / 3)
+        {
+            engineController.clip = EngineSounds[2];
+        }
+
+        else if (rb.velocity.magnitude >= (carSpeed * 2) / 3.5)
+        {
+            engineController.clip = EngineSounds[1];
+        }
+
+        else
+        {
+            engineController.clip = EngineSounds[0];
+        }
+        Debug.Log(rb.velocity.magnitude);
+
+        if (!engineController.isPlaying)
+        {
+            engineController.Play();
+        }
+    }
+
+    void Update()
+    {
+        ChangeSoundOnSpeed();
+    }
+
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        int randomNoise = Random.Range(0, WallHitSounds.Length);
+        wallHitController.clip = WallHitSounds[randomNoise];
+        if (!wallHitController.isPlaying)
+        {
+            wallHitController.Play();
+        }
+    }
 	
 
     void FixedUpdate()
