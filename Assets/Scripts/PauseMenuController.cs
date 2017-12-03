@@ -9,6 +9,8 @@ public class PauseMenuController : MonoBehaviour {
     public Slider powerSlider, brakesSlider, handlingSlider;
     public int MaxSliderValue = 10;
 
+    public int PowerMultiplication, BrakesMultiplication, HandlingMultiplication;
+
 	void Start ()
     {
         powerSlider.value = MaxSliderValue / 3;

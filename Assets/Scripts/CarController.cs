@@ -17,8 +17,6 @@ public class CarController : MonoBehaviour {
     public AudioSource engineController;
     public AudioSource wallHitController;
 
-    public 
-
     public GameObject FrontLeftTyre, FrontRightTyre, RearLeftTyre, RearRightTyre;
 
     Rigidbody2D rb;
