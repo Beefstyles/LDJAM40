@@ -5,7 +5,7 @@ using UnityEngine;
 public class CarController : MonoBehaviour {
 
     float carSpeed = 10F;
-    float torqueForce = 10F;
+    float torqueForce = -2F;
     Rigidbody2D rb;
 
 
