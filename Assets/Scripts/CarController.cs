@@ -6,6 +6,7 @@ public class CarController : MonoBehaviour {
 
     float carSpeed = 10F;
     float torqueForce = -2F;
+    float driftFactor = 0.9F;
     Rigidbody2D rb;
 
 
@@ -23,10 +24,18 @@ public class CarController : MonoBehaviour {
         }
 
         rb.AddTorque(Input.GetAxis("Horizontal") * torqueForce);
+
+        rb.velocity = ForwardVelocity() + RightVelocity()*driftFactor;
     }
 
-	void Update ()
+    Vector2 ForwardVelocity()
     {
+        return transform.up * Vector2.Dot(rb.velocity, transform.up);
+    }
 
-	}
+    Vector2 RightVelocity()
+    {
+        return transform.right * Vector2.Dot(rb.velocity, transform.right);
+    }
+
 }
