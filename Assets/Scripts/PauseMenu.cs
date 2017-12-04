@@ -74,6 +74,7 @@ public class PauseMenu : MonoBehaviour {
 
     public void RestartLap()
     {
+        TogglePauseMenu();
         gameController.StartLap();
     }
 

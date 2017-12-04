@@ -12,16 +12,19 @@ public class GameController : MonoBehaviour {
 
     CarController cc;
     LapTimer lapTimer;
+    LapController lapController;
 
     int numberOfGatesTrigged = 0;
     int numberOfGates = 0;
     public bool CanFinishLap = false;
 
     TimingGate[] timingGates;
+    
 
     public void StartLap()
     {
         numberOfGates = 0;
+        lapController.LapStarted = false;
         lapTimer.ResetTimer();
         cc = FindObjectOfType<CarController>();
         if(cc != null)
@@ -35,11 +38,12 @@ public class GameController : MonoBehaviour {
     }
 
 
-
     void Start()
     {
         lapTimer = FindObjectOfType<LapTimer>();
+        lapController = FindObjectOfType<LapController>();
         StartLap();
+        
     }
 
     public void CheckIfAllGatesHit()

@@ -38,6 +38,7 @@ public class LapTimer : MonoBehaviour {
     public void ResetTimer()
     {
         TimerValue = 0F;
+        TimerText.text = "";
     }
 
 }

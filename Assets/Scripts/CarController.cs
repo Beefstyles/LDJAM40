@@ -7,15 +7,16 @@ public class CarController : MonoBehaviour {
     float carSpeed = 3F; // Default 10F
     float brakingForce = 1F; // Default 5F
     float torqueForce = -50F; // Default -200F
-    float driftFactorSticky = 0.9F;
-    float driftFactorSlippy = 1F;
-    float maxStickyVelocity = 2.5F;
+    float driftFactorSticky = 0.8F; // Default 0.9F
+    float driftFactorSlippy = .99F;
+    float maxStickyVelocity = 4F; //2.5
     float minSlippyVelocity = 1.5F;
 
     public AudioClip[] EngineSounds;
     public AudioClip[] WallHitSounds;
     public AudioSource engineController;
     public AudioSource wallHitController;
+  
 
     public GameObject FrontLeftTyre, FrontRightTyre, RearLeftTyre, RearRightTyre;
 
@@ -104,7 +105,6 @@ public class CarController : MonoBehaviour {
             if(rb.velocity.magnitude <= 0)
             {
                 brakeForce = 0.1F;
-                Debug.Log("Minus");
                 rb.AddForceAtPosition(-transform.up * brakeForce, FrontLeftTyre.transform.position);
                 rb.AddForceAtPosition(-transform.up * brakeForce, FrontRightTyre.transform.position);
             }
@@ -117,7 +117,6 @@ public class CarController : MonoBehaviour {
             
         }
 
-        // If using positional wheel in phyis, then you probably want to add left/right force at the position of the front tyres proportional to your current forward speed
         float tf = Mathf.Lerp(0, torqueForce, rb.velocity.magnitude / 10);
 
         rb.angularVelocity = Input.GetAxis("Horizontal") * tf * gameController.HandlingMultiplication;
@@ -140,5 +139,7 @@ public class CarController : MonoBehaviour {
     {
         return transform.right * Vector2.Dot(rb.velocity, transform.right);
     }
+
+
 
 }
