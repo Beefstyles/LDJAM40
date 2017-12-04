@@ -17,13 +17,14 @@ public class GhostCar : MonoBehaviour {
 		
 	}
 	
-	void Update () {
+	/*void Update () {
         if (isRecording)
         {
             StartCoroutine("RecordPositionAndRotation");
         }
 	}
 
+    */
     IEnumerator RecordPositionAndRotation()
     {
         splitPoint += 0.01F;

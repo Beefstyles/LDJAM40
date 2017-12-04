@@ -9,28 +9,55 @@ public class PauseMenu : MonoBehaviour {
     public int MaxSliderValue = 10;
 
     public GameObject PauseMenuObjects;
-
+    public GameObject InfoText;
 
     GameController gameController;
 
     void Start()
     {
         gameController = FindObjectOfType<GameController>();
-        powerSlider.value = MaxSliderValue / 3;
         brakesSlider.value = MaxSliderValue / 3;
         handlingSlider.value = MaxSliderValue / 3;
-        
+        powerSlider.value = MaxSliderValue / 3;
 
         gameController.PowerMultiplication = powerSlider.value;
         gameController.BrakesMultiplication = brakesSlider.value;
         gameController.HandlingMultiplication = handlingSlider.value;
+        StartCoroutine("DelayInstructions");
     }
+
+
+    IEnumerator DelayInstructions()
+    {
+        ToggleInfo();
+        yield return new WaitForSeconds(2F);
+        ToggleInfo();
+    }
+
+    
 
     void Update()
     {
         if (Input.GetButtonDown("Menu"))
         {
             TogglePauseMenu();
+        }
+
+        if (Input.GetButtonDown("Help"))
+        {
+            ToggleInfo();
+        }
+    }
+
+    void ToggleInfo()
+    {
+        if (InfoText.activeSelf)
+        {
+            InfoText.SetActive(false);
+        }
+        else
+        {
+            InfoText.SetActive(true);
         }
     }
 
@@ -79,4 +106,8 @@ public class PauseMenu : MonoBehaviour {
     }
 
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
