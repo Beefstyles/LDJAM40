@@ -35,7 +35,25 @@ public class LapController : MonoBehaviour {
 
     public void LapFinished()
     {
-        if(lapTimer.TimerValue >= bestLapFloat)
+
+        if (bestLapFloat >= 0)
+        {
+            splitFloat = Mathf.Abs(bestLapFloat - lapTimer.TimerValue);
+            elapsedMinutes = (int)splitFloat / 60;
+            elapsedSeconds = (int)splitFloat % 60;
+            fraction = splitFloat * 1000;
+            fraction = (fraction % 1000);
+            if (lapTimer.TimerValue <= bestLapFloat)
+            {
+                CurrentSplit = "-" + string.Format("{0:0}:{1:00}.{2:000}", elapsedMinutes, elapsedSeconds, fraction);
+            }
+            else
+            {
+                CurrentSplit = "+" + string.Format("{0:0}:{1:00}.{2:000}", elapsedMinutes, elapsedSeconds, fraction);
+            }
+        }
+
+        if (lapTimer.TimerValue <= bestLapFloat || bestLapFloat <= 0)
         {
             bestLapFloat = lapTimer.TimerValue;
             elapsedMinutes = (int)bestLapFloat / 60;
@@ -45,20 +63,6 @@ public class LapController : MonoBehaviour {
             BestLap = string.Format("{0:0}:{1:00}.{2:000}", elapsedMinutes, elapsedSeconds, fraction);
         }
 
-        splitFloat = Mathf.Abs(bestLapFloat - lapTimer.TimerValue);
-        elapsedMinutes = (int)splitFloat / 60;
-        elapsedSeconds = (int)splitFloat % 60;
-        fraction = splitFloat * 1000;
-        fraction = (fraction % 1000);
-        if (lapTimer.TimerValue <= bestLapFloat)
-        {
-            CurrentSplit = "-" + string.Format("{0:0}:{1:00}.{2:000}", elapsedMinutes, elapsedSeconds, fraction);
-        }
-        else
-        {
-            CurrentSplit = "+" + string.Format("{0:0}:{1:00}.{2:000}", elapsedMinutes, elapsedSeconds, fraction);
-        }
-        
         UpdateBestLapAndSplit();
         lapTimer.ResetTimer();
         gc.ResetAllGates();
